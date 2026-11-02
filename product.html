@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Air Max Shadow | SOLEVERSE</title>
+    <link rel="stylesheet" href="style.css" />
+    <script>
+      try {
+        document.documentElement.dataset.theme =
+          localStorage.getItem("soleverseTheme") || "dark";
+      } catch (e) {
+        document.documentElement.dataset.theme = "dark";
+      }
+    </script>
+  </head>
+  <body>
+    <header class="navbar">
+      <a class="logo" href="index.html">SOLEVERSE</a
+      ><button class="menu-btn" onclick="toggleMenu()">☰</button>
+      <nav class="nav-links" id="navLinks">
+        <a href="index.html">Home</a><a href="sneakers.html">Sneakers</a
+        ><a href="sneakers.html?filter=new">New Arrivals</a
+        ><a href="sneakers.html?filter=sale">Sale</a
+        ><a href="contact.html">Contact</a>
+      </nav>
+      <div class="nav-actions">
+        <a href="checkout.html">Cart (<span class="cart-count">0</span>)</a
+        ><button
+          class="theme-toggle"
+          type="button"
+          onclick="toggleTheme()"
+          aria-label="Switch theme"
+          title="Switch theme"
+        >
+          <span class="theme-toggle-icon">☀</span
+          ><span class="theme-toggle-text">Light</span>
+        </button>
+      </div>
+    </header>
+    <main class="container">
+      <section class="detail">
+        <div>
+          <div class="card detail-image">
+            <img
+              id="detailProductImage"
+              class="product-photo detail-photo"
+              src="images/shoe-01.jpg"
+              alt="Air Max Shadow sneaker"
+              onerror="
+                this.onerror = null;
+                this.src = 'images/shoe-placeholder.svg';
+              "
+            />
+          </div>
+          <div class="thumbs">
+            <button
+              class="thumb"
+              type="button"
+              aria-label="Sneaker view 1"
+              onclick="
+                document.getElementById('detailProductImage').src =
+                  'images/shoe-01.jpg'
+              "
+            >
+              <img
+                src="images/shoe-01.jpg"
+                alt="Sneaker view 1"
+                onerror="
+                  this.onerror = null;
+                  this.src = 'images/shoe-placeholder.svg';
+                "
+              /></button
+            ><button
+              class="thumb"
+              type="button"
+              aria-label="Sneaker view 2"
+              onclick="
+                document.getElementById('detailProductImage').src =
+                  'images/shoe-01v2.jpg'
+              "
+            >
+              <img
+                src="images/shoe-01v2.jpg"
+                alt="Sneaker view 2"
+                onerror="
+                  this.onerror = null;
+                  this.src = 'images/shoe-placeholder.svg';
+                "
+              /></button
+            ><button
+              class="thumb"
+              type="button"
+              aria-label="Sneaker view 3"
+              onclick="
+                document.getElementById('detailProductImage').src =
+                  'images/shoe-01v3.jpg'
+              "
+            >
+              <img
+                src="images/shoe-01v3.jpg"
+                alt="Sneaker view 3"
+                onerror="
+                  this.onerror = null;
+                  this.src = 'images/shoe-placeholder.svg';
+                "
+              /></button
+            ><button
+              class="thumb"
+              type="button"
+              aria-label="Sneaker view 4"
+              onclick="
+                document.getElementById('detailProductImage').src =
+                  'images/shoe-01v4.jpg'
+              "
+            >
+              <img
+                src="images/shoe-01v4.jpg"
+                alt="Sneaker view 4"
+                onerror="
+                  this.onerror = null;
+                  this.src = 'images/shoe-placeholder.svg';
+                "
+              />
+            </button>
+          </div>
+        </div>
+        <div>
+          <div class="eyebrow">Sneakers / Running / Air Max Shadow</div>
+          <h1>Air Max Shadow Running Sneaker</h1>
+          <div>★★★★★ <span class="muted">128 verified reviews</span></div>
+          <div class="detail-price">
+            Rs. 12,999
+            <del class="muted" style="font-size: 16px">Rs. 14,499</del>
+          </div>
+          <p class="muted">
+            A sculpted heel unit and breathable engineered mesh keep every
+            stride soft and every lift clean. The midsole is tuned for daily
+            miles, springy through the forefoot and steady through the arch. A
+            padded collar locks your heel in without pressure, so it runs well
+            and still looks right on the street.
+          </p>
+          <div class="eyebrow" style="margin-top: 25px">Size (EU)</div>
+          <div class="sizes" id="sizes">
+            <button class="size-btn">40</button
+            ><button class="size-btn">41</button
+            ><button class="size-btn active">42</button
+            ><button class="size-btn">43</button
+            ><button class="size-btn">44</button
+            ><button class="size-btn">45</button>
+          </div>
+          <!-- <div class="eyebrow">Colour · Midnight</div>
+          <div class="color-dots">
+            <button class="color-dot" style="background: #1a1a2e"></button
+            ><button class="color-dot" style="background: #777"></button
+            ><button class="color-dot" style="background: #f5f5f0"></button
+            ><button class="color-dot" style="background: #2d5016"></button>
+          </div> -->
+          <div class="qty">
+            <button onclick="changeQty(-1)">−</button><span id="qty">1</span
+            ><button onclick="changeQty(1)">+</button>
+          </div>
+          <button
+            class="btn"
+            style="width: 100%"
+            onclick="addProductToCart('Air Max Shadow', 12999)"
+          >
+            Add to cart
+          </button>
+          <p class="mono muted" style="font-size: 12px; margin-top: 12px">
+            FREE SHIPPING · ARRIVES IN 2–4 DAYS
+          </p>
+        </div>
+      </section>
+    </main>
+    <footer class="footer container">
+      <span>© 2026 SOLEVERSE · Karachi, Pakistan</span
+      ><span>info@soleverse.com · +92 300 1234567</span>
+      <div class="footer-links">
+        <a href="index.html">Home</a><a href="sneakers.html">Shop</a
+        ><a href="contact.html">Contact</a>
+      </div>
+    </footer>
+    <script src="script.js"></script>
+  </body>
+</html>
