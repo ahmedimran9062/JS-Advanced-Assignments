@@ -25,6 +25,9 @@
         ><a href="contact.html">Contact</a>
       </nav>
       <div class="nav-actions">
+        <a href="favorites.html"
+          >♡ Favorites (<span class="fav-count">0</span>)</a
+        >
         <a href="checkout.html">Cart (<span class="cart-count">0</span>)</a
         ><button
           class="theme-toggle"
@@ -43,7 +46,7 @@
         <div>
           <div class="card detail-image">
             <img
-              id="detailProductImage"
+              id="detailImage"
               class="product-photo detail-photo"
               src="images/shoe-01.jpg"
               alt="Air Max Shadow sneaker"
@@ -53,93 +56,14 @@
               "
             />
           </div>
-          <div class="thumbs">
-            <button
-              class="thumb"
-              type="button"
-              aria-label="Sneaker view 1"
-              onclick="
-                document.getElementById('detailProductImage').src =
-                  'images/shoe-01.jpg'
-              "
-            >
-              <img
-                src="images/shoe-01.jpg"
-                alt="Sneaker view 1"
-                onerror="
-                  this.onerror = null;
-                  this.src = 'images/shoe-placeholder.svg';
-                "
-              /></button
-            ><button
-              class="thumb"
-              type="button"
-              aria-label="Sneaker view 2"
-              onclick="
-                document.getElementById('detailProductImage').src =
-                  'images/shoe-01v2.jpg'
-              "
-            >
-              <img
-                src="images/shoe-01v2.jpg"
-                alt="Sneaker view 2"
-                onerror="
-                  this.onerror = null;
-                  this.src = 'images/shoe-placeholder.svg';
-                "
-              /></button
-            ><button
-              class="thumb"
-              type="button"
-              aria-label="Sneaker view 3"
-              onclick="
-                document.getElementById('detailProductImage').src =
-                  'images/shoe-01v3.jpg'
-              "
-            >
-              <img
-                src="images/shoe-01v3.jpg"
-                alt="Sneaker view 3"
-                onerror="
-                  this.onerror = null;
-                  this.src = 'images/shoe-placeholder.svg';
-                "
-              /></button
-            ><button
-              class="thumb"
-              type="button"
-              aria-label="Sneaker view 4"
-              onclick="
-                document.getElementById('detailProductImage').src =
-                  'images/shoe-01v4.jpg'
-              "
-            >
-              <img
-                src="images/shoe-01v4.jpg"
-                alt="Sneaker view 4"
-                onerror="
-                  this.onerror = null;
-                  this.src = 'images/shoe-placeholder.svg';
-                "
-              />
-            </button>
-          </div>
+          <div class="thumbs" id="detailThumbs"></div>
         </div>
         <div>
-          <div class="eyebrow">Sneakers / Running / Air Max Shadow</div>
-          <h1>Air Max Shadow Running Sneaker</h1>
+          <div class="eyebrow" id="detailCrumb"></div>
+          <h1 id="detailTitle"></h1>
           <div>★★★★★ <span class="muted">128 verified reviews</span></div>
-          <div class="detail-price">
-            Rs. 12,999
-            <del class="muted" style="font-size: 16px">Rs. 14,499</del>
-          </div>
-          <p class="muted">
-            A sculpted heel unit and breathable engineered mesh keep every
-            stride soft and every lift clean. The midsole is tuned for daily
-            miles, springy through the forefoot and steady through the arch. A
-            padded collar locks your heel in without pressure, so it runs well
-            and still looks right on the street.
-          </p>
+          <div class="detail-price" id="detailPrice"></div>
+          <p class="muted" id="detailDesc"></p>
           <div class="eyebrow" style="margin-top: 25px">Size (EU)</div>
           <div class="sizes" id="sizes">
             <button class="size-btn">40</button
@@ -160,13 +84,15 @@
             <button onclick="changeQty(-1)">−</button><span id="qty">1</span
             ><button onclick="changeQty(1)">+</button>
           </div>
-          <button
-            class="btn"
-            style="width: 100%"
-            onclick="addProductToCart('Air Max Shadow', 12999)"
-          >
+          <button class="btn" id="detailAddBtn" style="width: 100%">
             Add to cart
           </button>
+          <button
+            class="btn-outline"
+            id="detailFavBtn"
+            type="button"
+            style="width: 100%; margin-top: 12px"
+          ></button>
           <p class="mono muted" style="font-size: 12px; margin-top: 12px">
             FREE SHIPPING · ARRIVES IN 2–4 DAYS
           </p>

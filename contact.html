@@ -1,1 +1,99 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Contact | SOLEVERSE</title><link rel="stylesheet" href="style.css"><script>try{document.documentElement.dataset.theme=localStorage.getItem("soleverseTheme")||"dark"}catch(e){document.documentElement.dataset.theme="dark"}</script></head><body><header class="navbar"><a class="logo" href="index.html">SOLEVERSE</a><button class="menu-btn" onclick="toggleMenu()">☰</button><nav class="nav-links" id="navLinks"><a href="index.html">Home</a><a href="sneakers.html">Sneakers</a><a href="sneakers.html?filter=new">New Arrivals</a><a href="sneakers.html?filter=sale">Sale</a><a href="contact.html">Contact</a></nav><div class="nav-actions"><a href="checkout.html">Cart (<span class="cart-count">0</span>)</a><button class="theme-toggle" type="button" onclick="toggleTheme()" aria-label="Switch theme" title="Switch theme"><span class="theme-toggle-icon">☀</span><span class="theme-toggle-text">Light</span></button></div></header><main class="container contact-layout"><section><div class="eyebrow">Contact</div><h1>Talk to a real person.</h1><p class="muted" style="max-width:400px">Sizing, orders or a pair you can't find. Message us and we'll get back to you as soon as possible.</p><div class="contact-details">Karachi, Pakistan<br>info@soleverse.com<br>+92 300 1234567</div></section><form class="card form-card" onsubmit="sendContact(event)"><h2>Send us a message</h2><div class="field"><label>Your name</label><input required type="text" placeholder="Enter your name"></div><div class="field"><label>Email address</label><input required type="email" placeholder="you@example.com"></div><div class="field"><label>Subject</label><select required><option value="">Choose a subject</option><option>Order support</option><option>Size guide</option><option>Product inquiry</option><option>Return / Exchange</option><option>Other</option></select></div><div class="field"><label>Message</label><textarea required rows="5" placeholder="How can we help?"></textarea></div><button class="btn" type="submit">Send message</button><p id="contactMessage" class="muted" aria-live="polite"></p></form></main><footer class="footer container"><span>© 2026 SOLEVERSE · Karachi, Pakistan</span><span>info@soleverse.com · +92 300 1234567</span><div class="footer-links"><a href="index.html">Home</a><a href="sneakers.html">Shop</a><a href="contact.html">Contact</a></div></footer><script src="script.js"></script></body></html>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact | SOLEVERSE</title>
+    <link rel="stylesheet" href="style.css" />
+    <script>
+      try {
+        document.documentElement.dataset.theme =
+          localStorage.getItem("soleverseTheme") || "dark";
+      } catch (e) {
+        document.documentElement.dataset.theme = "dark";
+      }
+    </script>
+  </head>
+  <body>
+    <header class="navbar">
+      <a class="logo" href="index.html">SOLEVERSE</a
+      ><button class="menu-btn" onclick="toggleMenu()">☰</button>
+      <nav class="nav-links" id="navLinks">
+        <a href="index.html">Home</a><a href="sneakers.html">Sneakers</a
+        ><a href="sneakers.html?filter=new">New Arrivals</a
+        ><a href="sneakers.html?filter=sale">Sale</a
+        ><a href="contact.html">Contact</a>
+      </nav>
+      <div class="nav-actions">
+        <a href="favorites.html"
+          >♡ Favorites (<span class="fav-count">0</span>)</a
+        >
+        <a href="checkout.html">Cart (<span class="cart-count">0</span>)</a
+        ><button
+          class="theme-toggle"
+          type="button"
+          onclick="toggleTheme()"
+          aria-label="Switch theme"
+          title="Switch theme"
+        >
+          <span class="theme-toggle-icon">☀</span
+          ><span class="theme-toggle-text">Light</span>
+        </button>
+      </div>
+    </header>
+    <main class="container contact-layout">
+      <section>
+        <div class="eyebrow">Contact</div>
+        <h1>Talk to a real person.</h1>
+        <p class="muted" style="max-width: 400px">
+          Sizing, orders or a pair you can't find. Message us and we'll get back
+          to you as soon as possible.
+        </p>
+        <div class="contact-details">
+          Karachi, Pakistan<br />info@soleverse.com<br />+92 300 1234567
+        </div>
+      </section>
+      <form class="card form-card" onsubmit="sendContact(event)">
+        <h2>Send us a message</h2>
+        <div class="field">
+          <label>Your name</label
+          ><input required type="text" placeholder="Enter your name" />
+        </div>
+        <div class="field">
+          <label>Email address</label
+          ><input required type="email" placeholder="you@example.com" />
+        </div>
+        <div class="field">
+          <label>Subject</label
+          ><select required>
+            <option value="">Choose a subject</option>
+            <option>Order support</option>
+            <option>Size guide</option>
+            <option>Product inquiry</option>
+            <option>Return / Exchange</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Message</label
+          ><textarea
+            required
+            rows="5"
+            placeholder="How can we help?"
+          ></textarea>
+        </div>
+        <button class="btn" type="submit">Send message</button>
+        <p id="contactMessage" class="muted" aria-live="polite"></p>
+      </form>
+    </main>
+    <footer class="footer container">
+      <span>© 2026 SOLEVERSE · Karachi, Pakistan</span
+      ><span>info@soleverse.com · +92 300 1234567</span>
+      <div class="footer-links">
+        <a href="index.html">Home</a><a href="sneakers.html">Shop</a
+        ><a href="contact.html">Contact</a>
+      </div>
+    </footer>
+    <script src="script.js"></script>
+  </body>
+</html>
