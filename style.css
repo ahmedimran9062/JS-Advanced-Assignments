@@ -597,6 +597,14 @@ h2 {
   padding: 60px 20px;
   color: var(--muted);
 }
+@media (max-width: 917px) {
+  .fav-text {
+    display: none;
+  }
+  .theme-toggle-text {
+    display: none;
+  }
+}
 @media (max-width: 900px) {
   .product-grid {
     grid-template-columns: repeat(2, 1fr);
@@ -620,18 +628,17 @@ h2 {
     height: 400px;
   }
 }
-@media (max-width: 650px) {
-  .container {
-    width: calc(100% - 32px);
-  }
+@media (max-width: 800px) {
   .navbar {
     padding: 14px 16px;
   }
   .menu-btn {
     display: block;
   }
+
+  /* Was display: none. Now always flex, hidden with visibility instead. */
   .nav-links {
-    display: none;
+    display: flex;
     position: absolute;
     top: 62px;
     left: 0;
@@ -641,10 +648,71 @@ h2 {
     flex-direction: column;
     align-items: flex-start;
     border-bottom: 1px solid var(--line);
+
+    /* closed state */
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-8px);
+    transition:
+      opacity 0.3s ease,
+      transform 0.3s ease,
+      visibility 0s linear 0.3s;
   }
+
+  /* Was display: flex. Now just the open state. */
   .nav-links.show {
-    display: flex;
+    visibility: visible;
+    opacity: 1;
+    pointer-events: auto;
+    transform: none;
+    transition-delay: 0s;
   }
+
+  /* Links start lowered and invisible... */
+  .nav-links a {
+    opacity: 0;
+    transform: translateY(14px);
+    transition:
+      opacity 0.35s ease,
+      transform 0.35s cubic-bezier(0.22, 0.8, 0.24, 1),
+      color 0.2s ease;
+  }
+
+  /* ...and rise into place one after another when the menu opens */
+  .nav-links.show a {
+    opacity: 1;
+    transform: none;
+    transition-delay: calc(80ms + var(--i, 0) * 70ms);
+  }
+  .nav-links a:nth-child(1) {
+    --i: 0;
+  }
+  .nav-links a:nth-child(2) {
+    --i: 1;
+  }
+  .nav-links a:nth-child(3) {
+    --i: 2;
+  }
+  .nav-links a:nth-child(4) {
+    --i: 3;
+  }
+  .nav-links a:nth-child(5) {
+    --i: 4;
+  }
+  .nav-links a:nth-child(6) {
+    --i: 5;
+  }
+
+  .fav-text {
+    display: inline;
+  }
+}
+@media (max-width: 650px) {
+  .container {
+    width: calc(100% - 32px);
+  }
+
   .nav-actions {
     gap: 10px;
   }
@@ -708,8 +776,24 @@ h2 {
   .footer-links {
     flex-wrap: wrap;
   }
+  .fav-text {
+    display: inline;
+  }
+  .theme-toggle-text {
+    display: inline;
+  }
 }
-
+.fav-link-nav {
+  display: none;
+}
+@media (max-width: 530px) {
+  .fav-link-action {
+    display: none;
+  }
+  .fav-link-nav {
+    display: inline;
+  }
+}
 /* ===== SOLEVERSE THEME, PRODUCT IMAGES & HOVER UPDATES ===== */
 :root {
   --page-gradient:
@@ -1242,4 +1326,79 @@ body::before {
 
 .thankyou-box p {
   margin-bottom: 24px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nav-links,
+  .nav-links a {
+    transition-duration: 1ms !important;
+    transition-delay: 0s !important;
+  }
+}
+.field select {
+  appearance: none;
+  -webkit-appearance: none;
+  padding-right: 2.75rem;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%239999a8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 1rem;
+}
+
+:root[data-theme="light"] .field select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23666666' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+}
+
+.detail.is-loading {
+  visibility: hidden;
+}
+
+/* Reserve the thumbnail row so a missing thumbnail can't pull the page up */
+.thumbs {
+  min-height: 80px;
+}
+
+@keyframes detail-rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes detail-image-in {
+  from {
+    opacity: 0;
+    transform: scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* "backwards" (not "both") so your hover transforms still work afterwards */
+.detail:not(.is-loading) .detail-image {
+  animation: detail-image-in 0.6s cubic-bezier(0.22, 0.8, 0.24, 1) backwards;
+}
+
+.detail:not(.is-loading) .thumbs {
+  animation: detail-rise 0.5s cubic-bezier(0.22, 0.8, 0.24, 1) 0.3s backwards;
+}
+
+/* Info column: every direct child rises in turn (--i is set by the JS) */
+.detail:not(.is-loading) > div:last-child > * {
+  animation: detail-rise 0.5s cubic-bezier(0.22, 0.8, 0.24, 1) backwards;
+  animation-delay: calc(120ms + var(--i, 0) * 50ms);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .detail .detail-image,
+  .detail .thumbs,
+  .detail > div:last-child > * {
+    animation: none !important;
+  }
 }

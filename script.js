@@ -747,6 +747,20 @@ function renderProductDetail() {
       );
     };
   }
+  // Reveal only when the image and fonts are ready (max wait 1.2s so it never stays blank)
+  document
+    .querySelectorAll(".detail > div:last-child > *")
+    .forEach((el, i) => el.style.setProperty("--i", i));
+
+  const ready = Promise.all([
+    mainImage.decode().catch(() => {}),
+    document.fonts ? document.fonts.ready : Promise.resolve(),
+  ]);
+  const timeout = new Promise((resolve) => setTimeout(resolve, 1200));
+
+  Promise.race([ready, timeout]).then(() => {
+    document.querySelector(".detail").classList.remove("is-loading");
+  });
 }
 
 // ========================================
@@ -950,7 +964,5 @@ if (urlFilterValue === "new") {
 } else if (urlFilterValue === "sale") {
   document.querySelector("#pill-sale").classList.add("active");
 } else {
-  document.querySelector("#pill-all").classList.add("active");
+  document.querySelector("#pill-all")?.classList.add("active");
 }
-
-

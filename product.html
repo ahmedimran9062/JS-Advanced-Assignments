@@ -5,6 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Air Max Shadow | SOLEVERSE</title>
     <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display&display=swap"
+      rel="stylesheet"
+    />
     <script>
       try {
         document.documentElement.dataset.theme =
@@ -23,10 +29,17 @@
         ><a href="sneakers.html?filter=new">New Arrivals</a
         ><a href="sneakers.html?filter=sale">Sale</a
         ><a href="contact.html">Contact</a>
+        <a href="favorites.html" class="fav-link-nav"
+          >♡ <span class="fav-text">Favorites</span> (<span class="fav-count"
+            >0</span
+          >)</a
+        >
       </nav>
       <div class="nav-actions">
-        <a href="favorites.html"
-          >♡ Favorites (<span class="fav-count">0</span>)</a
+        <a href="favorites.html" class="fav-link-action"
+          >♡ <span class="fav-text">Favorites</span> (<span class="fav-count"
+            >0</span
+          >)</a
         >
         <a href="checkout.html">Cart (<span class="cart-count">0</span>)</a
         ><button
@@ -42,14 +55,13 @@
       </div>
     </header>
     <main class="container">
-      <section class="detail">
+      <section class="detail is-loading">
         <div>
           <div class="card detail-image">
             <img
               id="detailImage"
               class="product-photo detail-photo"
-              src="images/shoe-01.jpg"
-              alt="Air Max Shadow sneaker"
+              alt=""
               onerror="
                 this.onerror = null;
                 this.src = 'images/shoe-placeholder.svg';
@@ -110,4 +122,3 @@
     <script src="script.js"></script>
   </body>
 </html>
-
