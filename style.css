@@ -230,9 +230,8 @@ h2 {
 }
 .shoe-art {
   width: 100%;
-  max-width: 520px;
-  height: auto;
-  object-fit: contain;
+  height: 100%;
+  object-fit: cover;
   display: block;
   margin: 0 auto;
   filter: drop-shadow(0 25px 30px rgba(0, 0, 0, 0.45));
@@ -265,6 +264,9 @@ h2 {
 }
 .product-visual .shoe-art {
   width: 100%;
+}
+.product-visual .product-photo {
+  overflow: hidden;
 }
 .product-info {
   padding: 16px 18px 20px;
@@ -1076,17 +1078,6 @@ body::before {
   object-fit: cover;
 }
 
-@keyframes slide-up {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
 .product-card {
   animation: slide-up 0.4s ease-out backwards;
 }
@@ -1400,5 +1391,43 @@ body::before {
   .detail .thumbs,
   .detail > div:last-child > * {
     animation: none !important;
+  }
+}
+
+/* Hidden (but still taking up space) until script.js has set the text */
+.shop-head.is-loading {
+  visibility: hidden;
+}
+
+.shop-head:not(.is-loading) > * {
+  animation: slide-up 0.4s ease-out backwards;
+  animation-delay: calc(var(--i, 0) * 70ms);
+}
+.shop-head > :nth-child(1) {
+  --i: 0;
+}
+.shop-head > :nth-child(2) {
+  --i: 1;
+}
+.shop-head > :nth-child(3) {
+  --i: 2;
+}
+.shop-head > :nth-child(4) {
+  --i: 3;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .shop-head > * {
+    animation: none !important;
+  }
+}
+@keyframes slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
