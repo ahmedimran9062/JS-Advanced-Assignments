@@ -23,7 +23,7 @@ const FAV_KEY = "soleverseFavourites";
   };
   var fjs = d.getElementsByTagName(s)[0];
   fjs.parentNode.insertBefore(js, fjs);
-})(window, document, "script", "jh71spbjbwnzy8mq1c61h0f5dd8hfwr7");
+})(window, document, "script", "jh7a4bffnj43s4ew4shga1n09n8hmte5");
 
 // ========================================
 // 1. PRODUCTS DATA
@@ -105,7 +105,7 @@ const products = [
     ],
   },
   {
-    id: 1,
+    id: 6,
     name: "Air Max Shadow",
     type: "Running",
     price: 12999,

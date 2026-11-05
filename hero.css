@@ -1,0 +1,144 @@
+/* ==========================================================
+   SOLEVERSE hero. Everything is scoped to .hx so it can't
+   clash with the rest of your CSS. Paste at the TOP or BOTTOM.
+   Needs from your site: --grad, .btn, .btn-outline (you already have them)
+   ========================================================== */
+
+/* ---------- 1. THEME TOKENS ----------
+   Light is the default. The second block is DARK.
+   >>> Change the selector list in the dark block to match YOUR toggle:
+       [data-theme="dark"] (attribute on <html>/<body>), .dark, or .dark-mode */
+.hx{
+  --hx-nav:72px;                         /* your navbar height, so the hero fits the screen */
+  --hx-pad:clamp(20px,5vw,72px);         /* side padding, match your .container padding */
+  --hx-bg:radial-gradient(70% 70% at 62% 46%,#fff 0%,#f2f2f0 55%,#e3e3e0 100%);
+  --hx-fg:#0a0a0a; --hx-mut:#5c5c5c; --hx-line:rgba(0,0,0,.12);
+  --hx-word:#0a0a0a;
+  --hx-smoke:rgba(110,110,120,.2); --hx-smoke2:rgba(110,110,120,.06);
+  --hx-beam:#000; --hx-beam-op:0;
+  --hx-floor:linear-gradient(180deg,rgba(0,0,0,.02),rgba(0,0,0,.1)); --hx-floor-line:rgba(0,0,0,.06);
+  --hx-glass:linear-gradient(160deg,rgba(255,255,255,.96),rgba(244,244,242,.92));
+  --hx-chip:rgba(255,255,255,.92); --hx-tickbg:rgba(255,255,255,.92);
+  --hx-drop:rgba(0,0,0,.32); --hx-pool:rgba(0,0,0,.3); --hx-refl:.12;
+}
+:is([data-theme="dark"],.dark,.dark-mode) .hx{
+  --hx-bg:radial-gradient(60% 60% at 62% 46%,#222 0%,#0b0b0b 55%,#050505 100%);
+  --hx-fg:#f5f5f4; --hx-mut:#a3a3a3; --hx-line:rgba(255,255,255,.14);
+  --hx-word:#fff;
+  --hx-smoke:rgba(220,220,225,.26); --hx-smoke2:rgba(220,220,225,.08);
+  --hx-beam:#fff; --hx-beam-op:.35;
+  --hx-floor:linear-gradient(180deg,rgba(255,255,255,.07),#000 75%); --hx-floor-line:rgba(255,255,255,.14);
+  --hx-glass:linear-gradient(160deg,rgba(38,38,40,.94),rgba(16,16,18,.94));
+  --hx-chip:rgba(12,12,12,.9); --hx-tickbg:rgba(5,5,5,.92);
+  --hx-drop:rgba(0,0,0,.75); --hx-pool:rgba(255,255,255,.3); --hx-refl:.22;
+}
+
+/* ---------- 2. BASE ---------- */
+.hx{position:relative;isolation:isolate;overflow:hidden;min-height:max(620px,calc(100svh - var(--hx-nav)));color:var(--hx-fg);background:var(--hx-bg);--mx:0;--my:0;--sy:0;transition:background .4s,color .4s}
+.hx *,.hx *::before,.hx *::after{box-sizing:border-box}
+.hx-stage{position:absolute;inset:0}
+/* a "layer" is just a full-size wrapper (mouse/scroll movement removed for performance) */
+.hx-l{position:absolute;inset:0;pointer-events:none}
+
+/* ---------- 3. BACKGROUND ---------- */
+.hx-smoke{position:absolute;border-radius:50%;background:radial-gradient(closest-side,var(--hx-smoke),var(--hx-smoke2) 60%,transparent);will-change:transform;animation:hx-drift 14s ease-in-out infinite alternate,hx-fade 2s .3s both}
+.hx-s1{width:46vw;height:34vw;left:-12vw;top:16%}
+.hx-s2{width:42vw;height:30vw;right:-10vw;top:28%;animation-delay:-5s,.6s}
+.hx-s3{width:34vw;height:20vw;left:30vw;top:0;opacity:.5;animation-delay:-9s,.9s}
+.hx-s4{width:60vw;height:15vw;left:-8vw;bottom:-6%}
+.hx-s5{width:56vw;height:13vw;right:-8vw;bottom:-4%;animation-delay:-4s,1.2s}
+.hx-beam{position:absolute;height:3px;width:46vw;background:linear-gradient(90deg,transparent,var(--hx-beam) 60%,transparent);opacity:var(--hx-beam-op);animation:hx-beam 1.6s .4s both cubic-bezier(.2,.8,.2,1)}
+.hx-b1{left:-12vw;top:52%;transform:rotate(24deg)}
+.hx-b2{right:-14vw;top:60%;transform:rotate(-16deg);animation-delay:.7s}
+.hx-floor{position:absolute;left:0;right:0;bottom:0;height:24%;background:var(--hx-floor);border-top:1px solid var(--hx-floor-line)}
+.hx-fg{z-index:4}
+
+/* ---------- 4. SHOE + GIANT WORD ----------
+   .hx-pos is the shoe's box. The word lives INSIDE it (z-index 1) and the shoe is z-index 3,
+   so SOLEVERSE is always behind the shoe at every screen size. */
+.hx-pos{position:absolute;z-index:2;left:62%;bottom:14%;width:clamp(320px,min(46vw,88svh),820px);aspect-ratio:835/536;transform:translateX(-50%);container-type:inline-size}
+.hx-wl{z-index:1}.hx-sl{z-index:3}
+.hx-word{position:absolute;left:calc(50% - 26cqw);top:-24%;transform:translateX(-50%);white-space:nowrap;font-weight:800;line-height:1;letter-spacing:-.045em;font-size:min(30cqw,16vw);color:var(--hx-word);-webkit-mask-image:linear-gradient(180deg,#000 12%,rgba(0,0,0,.1) 95%);mask-image:linear-gradient(180deg,#000 12%,rgba(0,0,0,.1) 95%)}
+.hx-word span{display:inline-block;animation:hx-rise 1.3s calc(.25s + var(--i)*.07s) both cubic-bezier(.2,.8,.2,1)}
+.hx-enter{animation:hx-emerge 1.8s .5s both cubic-bezier(.16,.9,.2,1)}
+.hx-float{position:relative;animation:hx-float 7s 2.4s ease-in-out infinite}
+.hx-img{display:block;width:100%;height:auto;filter:drop-shadow(0 28px 26px var(--hx-drop))}
+.hx-refl{position:absolute;left:0;top:97%;width:100%;transform:scaleY(-1);opacity:var(--hx-refl);-webkit-mask-image:linear-gradient(0deg,#000,transparent 45%);mask-image:linear-gradient(0deg,#000,transparent 45%)}
+.hx-pool{position:absolute;left:50%;bottom:-3%;width:86%;height:8%;transform:translateX(-50%);background:radial-gradient(closest-side,var(--hx-pool),transparent);animation:hx-pool 7s 2.4s ease-in-out infinite}
+.hx-hs{position:absolute;width:14px;height:14px;margin:-7px;border-radius:50%;background:var(--hx-fg);color:var(--hx-fg);pointer-events:auto;animation:hx-ping 2.4s infinite,hx-pop .6s var(--dl,2s) both}
+.hx-hs b{position:absolute;left:22px;top:-9px;white-space:nowrap;font:500 11px/1 ui-monospace,"DM Mono",monospace;letter-spacing:.06em;text-transform:uppercase;padding:7px 11px;border:1px solid var(--hx-line);border-radius:999px;background:var(--hx-chip);color:var(--hx-fg)}
+.hx-hs b.hx-left{left:auto;right:22px}
+
+/* ---------- 5. TEXT ---------- */
+.hx-copy{position:absolute;z-index:6;left:var(--hx-pad);bottom:calc(56px + 5svh);width:min(500px,34vw)}
+.hx-eyebrow{display:flex;align-items:center;gap:12px;font:500 12px/1 ui-monospace,"DM Mono",monospace;letter-spacing:.2em;text-transform:uppercase;color:var(--hx-mut)}
+.hx-eyebrow::before{content:"";width:34px;height:1px;background:currentColor}
+.hx h1{font-size:clamp(40px,5.2vw,86px);line-height:1;letter-spacing:-.02em;margin:16px 0 18px;color:var(--hx-fg)}
+.hx-grad{background:var(--grad,linear-gradient(90deg,#e55b00,#ff9a3c));-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+.hx-copy p{color:var(--hx-mut);max-width:40ch;margin:0}
+.hx-cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
+.hx-card{position:absolute;z-index:6;right:var(--hx-pad);top:clamp(24px,9svh,96px);width:250px;padding:20px;border:1px solid var(--hx-line);border-radius:24px;background:var(--hx-glass)}
+.hx-card small{font:500 11px/1 ui-monospace,"DM Mono",monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--hx-mut)}
+.hx-card h3{font-size:22px;margin:8px 0 2px;color:var(--hx-fg)}
+.hx-price{font:500 18px ui-monospace,"DM Mono",monospace}
+.hx-sz{display:flex;gap:6px;margin:14px 0}
+.hx-sz span{flex:1;text-align:center;font:500 12px ui-monospace,"DM Mono",monospace;padding:8px 0;border:1px solid var(--hx-line);border-radius:10px}
+.hx-sz .on{background:var(--hx-fg);color:var(--bg,#fff);border-color:var(--hx-fg)}
+.hx-bar{height:2px;background:var(--hx-line);overflow:hidden}.hx-bar i{display:block;height:100%;background:var(--hx-fg);animation:hx-prog 6s linear infinite}
+.hx-tick{position:absolute;z-index:6;left:0;right:0;bottom:0;height:56px;display:flex;align-items:center;overflow:hidden;border-top:1px solid var(--hx-line);background:var(--hx-tickbg);font:500 12px/1 ui-monospace,"DM Mono",monospace;letter-spacing:.2em;color:var(--hx-mut)}
+.hx-track{display:flex;width:max-content;animation:hx-mq 30s linear infinite}
+.hx-grp{display:flex;gap:44px;padding-right:44px;white-space:nowrap}
+.hx-up{opacity:0;animation:hx-up 1s var(--dl,1.5s) both cubic-bezier(.2,.8,.2,1)}
+
+/* ---------- 6. RESPONSIVE ----------
+   > 900px : desktop layout (text bottom-left, shoe right, card top-right)
+   <= 900px: tablet / phone. Stacked: art on top, text below, ticker last. */
+@media (max-width:900px),(max-aspect-ratio:3/2){
+  .hx{display:flex;flex-direction:column;min-height:calc(100svh - var(--hx-nav))}
+  .hx-stage{position:relative;inset:auto;flex:1 0 auto;min-height:clamp(330px,48svh,600px)}
+  .hx-pos{left:50%;bottom:7%;width:min(98vw,660px)}
+  .hx-word{left:50%;top:-14%;font-size:min(30cqw,16.5vw)}
+  .hx-floor{height:36%;border-top:0;-webkit-mask-image:linear-gradient(180deg,transparent,#000 45%,transparent);mask-image:linear-gradient(180deg,transparent,#000 45%,transparent)}
+  .hx-copy{position:relative;left:auto;bottom:auto;width:auto;padding:14px var(--hx-pad) 6px}
+  .hx h1{font-size:clamp(38px,9vw,64px)}
+  .hx-card,.hx-hs,.hx-refl{display:none}
+  .hx-tick{position:relative;margin-top:22px}
+}
+@media (max-width:480px){
+  .hx-cta .btn,.hx-cta .btn-outline{flex:1 1 auto;text-align:center}
+  .hx-tick{height:48px;font-size:11px}
+}
+/* portrait, square and 4:3 tablet screens (iPad etc.): stacked layout, bigger art and text */
+@media (min-width:700px) and (max-aspect-ratio:3/2){
+  .hx-stage{min-height:clamp(420px,54svh,820px)}
+  .hx-pos{width:max(360px,min(94vw,900px,calc((100svh - 400px)/.8)));bottom:6%}
+  .hx-copy{max-width:720px;padding:20px var(--hx-pad) 8px}
+  .hx h1{font-size:clamp(52px,7.4vw,92px)}
+  .hx-copy p{font-size:18px;max-width:46ch}
+}
+/* landscape tablets (4:3 to 3:2): text in two columns so everything fits on one screen */
+@media (min-width:901px) and (min-aspect-ratio:5/4) and (max-aspect-ratio:3/2){
+  .hx-stage{min-height:340px}
+  .hx-pos{width:max(380px,min(94vw,900px,calc((100svh - 330px)/.8)))}
+  .hx-copy{display:grid;grid-template-columns:1fr 1fr;column-gap:48px;align-items:end;max-width:none;padding:14px var(--hx-pad) 4px}
+  .hx-eyebrow{grid-column:1;grid-row:1}
+  .hx h1{grid-column:1;grid-row:2;margin:12px 0 0;font-size:clamp(40px,5.2vw,64px)}
+  .hx-copy p{grid-column:2;grid-row:1;font-size:16px}
+  .hx-cta{grid-column:2;grid-row:2;margin-top:18px}
+}
+@media (max-height:560px) and (min-width:901px){ .hx-copy p{display:none} }
+
+/* ---------- 7. ANIMATION ---------- */
+@keyframes hx-rise{from{opacity:0;transform:translateY(60%) rotate(4deg)}}
+@keyframes hx-emerge{from{opacity:0;transform:translateY(90px) scale(.92)}}
+@keyframes hx-float{50%{transform:translateY(-14px) rotate(-.6deg)}}
+@keyframes hx-pool{50%{transform:translateX(-50%) scale(.82);opacity:.6}}
+@keyframes hx-drift{to{transform:translate3d(6vw,-2vw,0) scale(1.12)}}
+@keyframes hx-fade{from{opacity:0}}
+@keyframes hx-beam{from{opacity:0}}
+@keyframes hx-up{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:none}}
+@keyframes hx-pop{from{transform:scale(0)}}
+@keyframes hx-ping{from{box-shadow:0 0 0 0 color-mix(in srgb,currentColor 50%,transparent)}70%,to{box-shadow:0 0 0 16px transparent}}
+@keyframes hx-mq{to{transform:translateX(-50%)}}
+@keyframes hx-prog{from{width:0}to{width:100%}}
+@media (prefers-reduced-motion:reduce){.hx *,.hx::after{animation:none!important;transition:none!important}.hx-up{opacity:1;transform:none}}

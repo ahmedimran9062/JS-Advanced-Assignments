@@ -10,6 +10,7 @@
       href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display&display=swap"
       rel="stylesheet"
     />
+    <link rel="stylesheet" href="hero.css" />
     <link rel="stylesheet" href="style.css" />
     <script>
       try {
@@ -56,40 +57,95 @@
       </div>
     </header>
     <main>
-      <section class="hero container">
-        <div>
-          <div class="eyebrow">Step into your next chapter</div>
-          <h1>
-            Find your
-            <span
-              style="
-                background: var(--grad);
-                background-clip: text;
-                color: transparent;
-              "
-              >next move.</span
+      <!-- ===== HERO: replaces your <section class="hero container"> ===== -->
+      <section class="hx" aria-label="Soleverse hero">
+        <div class="hx-stage">
+          <!-- 1. back: haze + light beams -->
+          <div class="hx-l" style="--d: -6" aria-hidden="true">
+            <i class="hx-smoke hx-s1"></i><i class="hx-smoke hx-s2"></i
+            ><i class="hx-smoke hx-s3"></i> <i class="hx-beam hx-b1"></i
+            ><i class="hx-beam hx-b2"></i>
+          </div>
+          <div class="hx-floor" aria-hidden="true"></div>
+
+          <div class="hx-pos">
+            <div
+              class="hx-l hx-wl"
+              style="--d: -14; --s: 0.25"
+              aria-hidden="true"
             >
+              <div class="hx-word">
+                <span style="--i: 0">S</span><span style="--i: 1">O</span
+                ><span style="--i: 2">L</span><span style="--i: 3">E</span
+                ><span style="--i: 4">V</span><span style="--i: 5">E</span
+                ><span style="--i: 6">R</span><span style="--i: 7">S</span
+                ><span style="--i: 8">E</span>
+              </div>
+            </div>
+            <div class="hx-l hx-sl" style="--d: 22; --s: 0.06">
+              <div class="hx-enter">
+                <div class="hx-float">
+                  <img
+                    class="hx-img"
+                    src="images/shoe-04-corner-Photoroom.png"
+                    alt="Blue and orange retro running sneaker"
+                    width="835"
+                    height="536"
+                  />
+                  <img
+                    class="hx-refl"
+                    src="images/shoe-04-corner-Photoroom.png"
+                    alt=""
+                    aria-hidden="true"
+                  />
+                  <span class="hx-hs" style="left: 38%; top: 44%; --dl: 2.2s"
+                    ><b>Suede + mesh</b></span
+                  >
+                  <span class="hx-hs" style="left: 56%; top: 20%; --dl: 2.5s"
+                    ><b>Lace-up fit</b></span
+                  >
+                  <span class="hx-hs" style="left: 70%; top: 86%; --dl: 2.8s"
+                    ><b class="hx-left">Grip outsole</b></span
+                  >
+                </div>
+              </div>
+              <div class="hx-pool"></div>
+            </div>
+          </div>
+
+          <div class="hx-l hx-fg" style="--d: 34" aria-hidden="true">
+            <i class="hx-smoke hx-s4"></i><i class="hx-smoke hx-s5"></i>
+          </div>
+        </div>
+
+        <div class="hx-copy">
+          <div class="hx-eyebrow hx-up" style="--dl: 1.5s">
+            Step into your next chapter
+          </div>
+          <h1 class="hx-up" style="--dl: 1.65s">
+            Find your <span class="hx-grad">next move.</span>
           </h1>
-          <p>
+          <p class="hx-up" style="--dl: 1.8s">
             Discover sneakers made for every pace, every place and every version
             of you. Premium comfort meets everyday style.
           </p>
-          <a class="btn" href="sneakers.html">Explore sneakers&nbsp; →</a>
-          <a class="btn-outline" href="sneakers.html?filter=new"
-            >New arrivals</a
-          >
-          <p class="mono muted" style="font-size: 12px; margin-top: 22px">
-            FREE SHIPPING · EASY RETURNS · AUTHENTIC PAIRS
-          </p>
+          <div class="hx-cta hx-up" style="--dl: 1.95s">
+            <a class="btn" href="sneakers.html">Explore sneakers&nbsp; →</a>
+            <a class="btn-outline" href="sneakers.html?filter=new"
+              >New arrivals</a
+            >
+          </div>
         </div>
-        <div class="hero-art">
-          <img
-            src="images/heroshoeimg2.jpg"
-            alt="Premium Sneakers"
-            class="shoe-art"
-          />
+        <div class="hx-tick" aria-hidden="true">
+          <div class="hx-track">
+            <div class="hx-grp">
+              <span>FREE SHIPPING</span><span>·</span><span>EASY RETURNS</span
+              ><span>·</span><span>AUTHENTIC PAIRS</span><span>·</span>
+            </div>
+          </div>
         </div>
       </section>
+
       <section class="section container">
         <div class="section-head">
           <div>
@@ -201,9 +257,9 @@
             <strong>10K+</strong><span>Happy customers</span>
           </div>
           <div class="stat">
-            <strong>500+</strong><span>Premium sneakers</span>
+            <strong>14+</strong><span>Premium sneakers</span>
           </div>
-          <div class="stat"><strong>50+</strong><span>Top brands</span></div>
+          <div class="stat"><strong>10+</strong><span>Top brands</span></div>
           <div class="stat">
             <strong>24/7</strong><span>Customer support</span>
           </div>

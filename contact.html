@@ -63,17 +63,22 @@
       <form class="card form-card" onsubmit="sendContact(event)">
         <h2>Send us a message</h2>
         <div class="field">
-          <label>Your name</label
-          ><input required type="text" placeholder="Enter your name" />
+          <label for="cname">Your name</label
+          ><input
+            id="cname"
+            required
+            type="text"
+            placeholder="Enter your name"
+          />
         </div>
         <div class="field">
-          <label>Email address</label
-          ><input required type="email" placeholder="you@example.com" />
+          <label for="cmail">Email address</label
+          ><input id="cmail" type="email" placeholder="you@example.com" />
         </div>
         <div class="field">
-          <label>Subject</label
-          ><select required>
-            <option value="">Choose a subject</option>
+          <label for="sub">Subject</label
+          ><select id="sub" required>
+            <option selected disabled hidden="">Choose a subject</option>
             <option>Order support</option>
             <option>Size guide</option>
             <option>Product inquiry</option>
@@ -82,8 +87,9 @@
           </select>
         </div>
         <div class="field">
-          <label>Message</label
+          <label for="cmess">Message</label
           ><textarea
+            id="cmess"
             required
             rows="5"
             placeholder="How can we help?"

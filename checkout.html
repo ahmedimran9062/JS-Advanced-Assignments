@@ -54,21 +54,27 @@
           <h2>Checkout</h2>
           <div class="eyebrow">Contact</div>
           <div class="field">
-            <label>Email</label
-            ><input required type="email" placeholder="Email address" />
+            <label for="umail">Email</label
+            ><input
+              id="umail"
+              required
+              type="email"
+              placeholder="Email address"
+            />
           </div>
           <div class="field">
-            <label>Phone</label
-            ><input required type="tel" placeholder="+92 3XX XXXXXXX" />
+            <label for="unum">Phone</label
+            ><input id="unum" type="tel" placeholder="+92 3XX XXXXXXX" />
           </div>
           <div class="eyebrow">Delivery</div>
           <div class="field">
-            <label>Full name</label><input required placeholder="Full name" />
+            <label for="uname">Full name</label
+            ><input id="uname" required placeholder="Full name" type="text" />
           </div>
           <div class="field">
-            <label>City</label
-            ><select required>
-              <option value="">Select city</option>
+            <label for="ucity">City</label
+            ><select id="ucity" required>
+              <option selected disabled hidden value="">Select city</option>
               <option>Karachi</option>
               <option>Lahore</option>
               <option>Islamabad</option>
@@ -77,8 +83,9 @@
             </select>
           </div>
           <div class="field">
-            <label>Address</label
+            <label for="uadd">Address</label
             ><textarea
+              id="uadd"
               required
               rows="3"
               placeholder="House, street, area"
@@ -86,9 +93,11 @@
           </div>
           <div class="eyebrow">Payment</div>
           <div class="field">
-            <label>Payment method</label
-            ><select required>
-              <option value="">Choose payment method</option>
+            <label for="upay">Payment method</label
+            ><select id="upay" required>
+              <option value="" selected disabled hidden>
+                Choose payment method
+              </option>
               <option>Cash on Delivery</option>
               <option>Bank Transfer</option>
               <option>Card Payment</option>
