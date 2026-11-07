@@ -546,7 +546,6 @@
     max-width: 46ch;
   }
 }
-/* landscape tablets (4:3 to 3:2): text in two columns so everything fits on one screen */
 @media (min-width: 901px) and (min-aspect-ratio: 5/4) and (max-aspect-ratio: 3/2) {
   .hx-stage {
     min-height: 340px;
@@ -594,11 +593,10 @@
   }
 }
 
-/* ---------- 7. ANIMATION ---------- */
 @keyframes hx-rise {
   from {
     opacity: 0;
-    transform: translateY(60%) rotate(4deg);
+    transform: translateY(-60%) rotate(4deg);
   }
 }
 @keyframes hx-emerge {
