@@ -21,6 +21,7 @@
     #f2f2f0 55%,
     #e3e3e0 100%
   );
+  --hx-blbg: rgba(255, 255, 255, 0.5);
   --hx-fg: #0a0a0a;
   --hx-mut: #5c5c5c;
   --hx-line: rgba(0, 0, 0, 0.12);
@@ -49,6 +50,8 @@
     #0b0b0b 55%,
     #050505 100%
   );
+  --hx-blbg: rgba(0, 0, 0, 0.5);
+
   --hx-fg: #f5f5f4;
   --hx-mut: #a3a3a3;
   --hx-line: rgba(255, 255, 255, 0.14);
@@ -313,11 +316,22 @@
   text-transform: uppercase;
   color: var(--hx-mut);
 }
+.hx-eyebrow.hx-up {
+  opacity: 1;
+  animation-fill-mode: backwards;
+}
 .hx-eyebrow::before {
   content: "";
   width: 34px;
   height: 1px;
   background: currentColor;
+}
+.hx-eyebrow .hx-text {
+  background: var(--hx-blbg);
+  padding: 5px 10px;
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  border-radius: 5px;
 }
 .hx h1 {
   font-size: clamp(40px, 5.2vw, 86px);
@@ -430,11 +444,13 @@
 .hx-track {
   display: flex;
   width: max-content;
+  animation: hx-mq 30s linear infinite;
 }
 .hx-grp {
   display: flex;
   gap: 44px;
   white-space: nowrap;
+  padding-right: 44px;
 }
 .hx-up {
   opacity: 0;
@@ -493,6 +509,7 @@
     display: none;
   }
   .hx-tick {
+    justify-content: flex-start;
     position: relative;
     margin-top: 22px;
   }
@@ -642,7 +659,7 @@
 }
 @keyframes hx-mq {
   to {
-    transform: translateX(-50%);
+    transform: translateX(-16.6667%);
   }
 }
 @keyframes hx-prog {
