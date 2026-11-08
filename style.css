@@ -326,7 +326,7 @@ h2 {
 .pill:hover {
   border-color: var(--orange);
   background: #e65b001c;
-  color: #ffad70;
+  color: var(--orange);
 }
 .filters {
   padding: 20px;
@@ -585,7 +585,6 @@ h2 {
     display: block;
   }
 
-  /* Was display: none. Now always flex, hidden with visibility instead. */
   .nav-links {
     display: flex;
     position: absolute;
@@ -597,8 +596,6 @@ h2 {
     flex-direction: column;
     align-items: flex-start;
     border-bottom: 1px solid var(--line);
-
-    /* closed state */
     visibility: hidden;
     opacity: 0;
     pointer-events: none;
@@ -609,7 +606,6 @@ h2 {
       visibility 0s linear 0.3s;
   }
 
-  /* Was display: flex. Now just the open state. */
   .nav-links.show {
     visibility: visible;
     opacity: 1;
@@ -618,7 +614,6 @@ h2 {
     transition-delay: 0s;
   }
 
-  /* Links start lowered and invisible... */
   .nav-links a {
     opacity: 0;
     transform: translateY(14px);
@@ -628,7 +623,6 @@ h2 {
       color 0.2s ease;
   }
 
-  /* ...and rise into place one after another when the menu opens */
   .nav-links.show a {
     opacity: 1;
     transform: none;
@@ -655,6 +649,9 @@ h2 {
 
   .fav-text {
     display: inline;
+  }
+  .nav-links {
+    background: var(--nav-bg);
   }
 }
 @media (max-width: 650px) {
@@ -797,6 +794,7 @@ h2 {
   --bg: #f4f5fb;
   --panel: #ffffff;
   --panel2: #edf0f8;
+  --orange: #b35000;
   --line: #dfe2ed;
   --text: #191a2a;
   --muted: #64697a;
@@ -1005,9 +1003,7 @@ body::before {
     padding: 0 9px;
     font-size: 11px;
   }
-  .nav-links {
-    background: var(--nav-bg);
-  }
+
   .product-card-action {
     padding: 0 10px 12px;
   }
