@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>To Do App</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header>
+      <div class="header-text">
+        <p>To do / 01</p>
+        <h1>THINGS <br />TO DO.</h1>
+      </div>
+      <section class="button-section">
+        <button class="btn themeBtn">light mode</button>
+      </section>
+    </header>
+    <main class="container">
+      <section class="form-section">
+        <form id="form" action="">
+          <h2>NEW TASK</h2>
+          <div class="input-container">
+            <label class="form-label" for="title">TITLE</label>
+            <input type="text" name="title" id="title" class="form-input" />
+          </div>
+          <div class="input-container">
+            <label class="form-label" for="date">DATE</label>
+            <input type="date" name="date" id="date" class="form-input" />
+          </div>
+          <button class="btn submitBtn">add task</button>
+        </form>
+      </section>
+      <section class="list-section">
+        <h2>YOUR LIST</h2>
+        <div class="search-container">
+          <label class="search-label" for="search">SEARCH</label>
+          <input type="text" id="search" name="search" oninput="updateList()" />
+        </div>
+        <div class="filter-container">
+          <div class="filter-sort">
+            <label for="sort">SORT BY</label>
+            <select onchange="updateList()" name="sort" id="sort">
+              <option value="newest">Newest added</option>
+              <option value="oldest">Oldest added</option>
+            </select>
+          </div>
+
+          <div class="filter-btns">
+            <button class="btn active" data-filter="all">All</button>
+            <button class="btn" data-filter="pending">pending</button>
+            <button class="btn" data-filter="completed">completed</button>
+          </div>
+        </div>
+        <p class="task-count">3 PENDING · 2 COMPLETED</p>
+        <ul class="list-container">
+          <li class="task">
+            <div>
+              <input type="checkbox" />
+            </div>
+            <div class="taskInfo">
+              <p class="taskTitle">Submit CSS assignment</p>
+              <p class="taskDate">19 NOV 2026</p>
+            </div>
+            <div class="taskActions">
+              <button class="btn editBtn">Edit</button>
+              <button class="btn deleteBtn">Delete</button>
+            </div>
+          </li>
+          <li class="task done">
+            <label for="taskCheck">
+              <input type="checkbox" id="taskCheck" />
+            </label>
+            <div class="taskInfo">
+              <p class="taskTitle">Finish homework</p>
+              <time class="taskDate" datetime="2026-11-19">19 NOV 2026</time>
+            </div>
+            <div class="taskActions">
+              <button class="btn editBtn" disabled>Edit</button>
+              <button class="btn deleteBtn">Delete</button>
+            </div>
+          </li>
+          <li class="task editing">
+            <label for="taskCheck">
+              <input type="checkbox" id="taskCheck" />
+            </label>
+            <div class="taskInfo">
+              <input type="text" class="form-input" aria-label="Edit title" />
+              <input type="date" class="form-input" aria-label="Edit date" />
+            </div>
+            <div class="taskActions">
+              <button class="btn saveBtn">save</button>
+              <button class="btn cancelBtn">cancel</button>
+            </div>
+          </li>
+        </ul>
+      </section>
+    </main>
+    <script src="script.js"></script>
+  </body>
+</html>
