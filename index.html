@@ -4,12 +4,18 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>To Do App</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
     <header>
       <div class="header-text">
-        <p>To do / 01</p>
+        <p></p>
         <h1>THINGS <br />TO DO.</h1>
       </div>
       <section class="button-section">
@@ -32,27 +38,37 @@
         </form>
       </section>
       <section class="list-section">
-        <h2>YOUR LIST</h2>
-        <div class="search-container">
-          <label class="search-label" for="search">SEARCH</label>
-          <input type="text" id="search" name="search" oninput="updateList()" />
+        <div id="empty-text">
+          <p>NOTHING HERE YET</p>
         </div>
-        <div class="filter-container">
-          <div class="filter-sort">
-            <label for="sort">SORT BY</label>
-            <select onchange="updateList()" name="sort" id="sort">
-              <option value="newest">Newest added</option>
-              <option value="oldest">Oldest added</option>
-            </select>
+        <div id="whole-list" class="hidden">
+          <h2>YOUR LIST</h2>
+          <div class="search-container">
+            <label class="search-label" for="search">SEARCH</label>
+            <input
+              type="text"
+              id="search"
+              name="search"
+              oninput="updateList()"
+            />
           </div>
+          <div class="filter-container">
+            <div class="filter-sort">
+              <label for="sort">SORT BY</label>
+              <select onchange="updateList()" name="sort" id="sort">
+                <option value="newest">Newest added</option>
+                <option value="oldest">Oldest added</option>
+              </select>
+            </div>
 
-          <div class="filter-btns">
-            <button class="btn active" data-filter="all">All</button>
-            <button class="btn" data-filter="pending">pending</button>
-            <button class="btn" data-filter="completed">completed</button>
+            <div class="filter-btns">
+              <button class="btn active" data-filter="all">All</button>
+              <button class="btn" data-filter="pending">pending</button>
+              <button class="btn" data-filter="completed">completed</button>
+            </div>
           </div>
+          <p class="task-count"></p>
         </div>
-        <p class="task-count">3 PENDING · 2 COMPLETED</p>
         <ul class="list-container">
           <li class="task">
             <div>

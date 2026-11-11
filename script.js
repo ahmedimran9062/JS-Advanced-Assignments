@@ -34,11 +34,13 @@ function formatDate(datestr) {
     .toUpperCase();
 }
 
-const todoArr = JSON.parse(localStorage.getItem("todos")) || [];
+let todoArr = JSON.parse(localStorage.getItem("todos")) || [];
 const todoForm = document.querySelector("#form");
 
 const listContainer = document.querySelector(".list-container");
 let editingId = null;
+const taskCount = document.querySelector(".task-count");
+
 function showListHandler(arr) {
   listContainer.innerHTML = "";
   arr.forEach((todoTask) => {
@@ -111,6 +113,26 @@ function showListHandler(arr) {
       updateList();
     });
 
+    const deleteBtn = task.querySelector(".deleteBtn");
+    const editBtn = task.querySelector(".editBtn");
+    deleteBtn.addEventListener("click", () => {
+      if (deleteBtn.classList.contains("confirmBtn")) {
+        todoArr = todoArr.filter((t) => t !== todoTask);
+        localStorage.setItem("todos", JSON.stringify(todoArr));
+        updateList();
+        return;
+      }
+      deleteBtn.textContent = "confirm?";
+      deleteBtn.classList.add("confirmBtn");
+      editBtn.style.display = "none";
+
+      setTimeout(() => {
+        deleteBtn.textContent = "delete";
+        deleteBtn.classList.remove("confirmBtn");
+        editBtn.style.display = "inline";
+      }, 3000);
+    });
+
     task
       .querySelector(".checkBox")
       .addEventListener("change", function (event) {
@@ -141,7 +163,6 @@ filterBtns.forEach((btn) => {
     updateList();
   });
 });
-updateList();
 
 todoForm.addEventListener("submit", function (event) {
   event.preventDefault();
@@ -166,7 +187,22 @@ todoForm.addEventListener("submit", function (event) {
   event.target.reset();
 });
 
+const emptyListText = document.querySelector("#empty-text");
+const wholeList = document.querySelector("#whole-list");
+
+function updatedListDisplay() {
+  if (todoArr.length) {
+    emptyListText.style.display = "none";
+    wholeList.classList.remove("hidden");
+  } else {
+    emptyListText.style.display = "grid";
+    wholeList.classList.add("hidden");
+  }
+}
+
 function updateList() {
+  const completedCount = todoArr.filter((task) => task.done).length;
+  const pendingCount = todoArr.filter((task) => !task.done).length;
   const searchValue = document
     .querySelector("#search")
     .value.toLowerCase()
@@ -176,10 +212,20 @@ function updateList() {
   const filteredArr = todoArr.filter((task) => {
     const searchResult = task.title.toLowerCase().includes(searchValue);
     let statusResult = true;
+    if (todoArr.length) {
+      taskCount.textContent = `${pendingCount} PENDING · ${completedCount} COMPLETED`;
+    }
 
     if (statusFilter === "completed") {
+      completedCount
+        ? (taskCount.textContent = `${completedCount} completed`)
+        : (taskCount.textContent = "nothing completed yet");
       statusResult = task.done;
     } else if (statusFilter === "pending") {
+      pendingCount
+        ? (taskCount.textContent = `${pendingCount} pending`)
+        : (taskCount.textContent = "all caught up");
+
       statusResult = !task.done;
     }
     return searchResult && statusResult;
@@ -192,4 +238,6 @@ function updateList() {
   }
 
   showListHandler(filteredArr);
+  updatedListDisplay();
 }
+updateList();
