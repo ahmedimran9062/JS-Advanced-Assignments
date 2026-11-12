@@ -11,7 +11,8 @@ Built with plain HTML, CSS and JavaScript. No frameworks or libraries.
 - **Edit in place.** Edit turns the task row into inputs, with Save and Cancel.
 - **Delete with confirmation.** The first click on Delete asks "Confirm?", and the second click removes the task. If you don't confirm, it resets after a few seconds.
 - **Search** tasks by title as you type.
-- **Sort** by newest or oldest added.
+- **Sort** by newest added, oldest added, due date (soonest or latest), or title (A to Z or Z to A). Tasks without a due date are always placed last in the due date sorts.
+- **Due status** on each task: Overdue, Due today, Due tomorrow, or Due in N days. It is hidden for tasks without a date and for completed tasks.
 - **Filter** by All, Pending or Completed.
 - **Live task count** that adapts to the active view, with friendly messages when the list is empty.
 - **Light and dark theme** with a toggle button.
@@ -43,4 +44,4 @@ No install or build step is needed.
 
 ## How it works
 
-Each task is an object with an id, title, date, done status and creation time. Adding, editing, ticking or deleting a task changes the array, saves it to `localStorage`, and redraws the list. Search, filter and sort are applied together in one function each time the list is drawn.
+Each task is an object with an id, title, date, done status, creation time and due time (in milliseconds, worked out from the date). Adding, editing, ticking or deleting a task changes the array, saves it to `localStorage`, and redraws the list. Search, filter and sort are applied together in one function each time the list is drawn.
