@@ -27,8 +27,16 @@
         <form id="form" action="">
           <h2>NEW TASK</h2>
           <div class="input-container">
-            <label class="form-label" for="title">TITLE</label>
-            <input type="text" name="title" id="title" class="form-input" />
+            <label class="form-label title-label" for="title"
+              >TITLE <span class="req" hidden>TITLE REQUIRED.</span></label
+            >
+            <input
+              type="text"
+              name="title"
+              id="title"
+              class="form-input"
+              placeholder="eg. Finish school project"
+            />
           </div>
           <div class="input-container">
             <label class="form-label" for="date">DATE</label>

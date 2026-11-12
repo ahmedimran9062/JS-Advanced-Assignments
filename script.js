@@ -74,15 +74,17 @@ function showListHandler(arr) {
       task.querySelector(".editDate").value = todoTask.date || "";
 
       task.querySelector(".saveBtn").addEventListener("click", () => {
-        const updatedTitle = task.querySelector(".editTitle").value;
-        if (!updatedTitle) return;
+        setTimeout(() => {
+          const updatedTitle = task.querySelector(".editTitle").value;
+          if (!updatedTitle) return;
 
-        todoTask.title = updatedTitle;
-        todoTask.date = task.querySelector(".editDate").value || null;
+          todoTask.title = updatedTitle;
+          todoTask.date = task.querySelector(".editDate").value || null;
 
-        editingId = null;
-        localStorage.setItem("todos", JSON.stringify(todoArr));
-        updateList();
+          editingId = null;
+          localStorage.setItem("todos", JSON.stringify(todoArr));
+          updateList();
+        }, 200);
       });
       task.querySelector(".cancelBtn").addEventListener("click", () => {
         editingId = null;
@@ -163,6 +165,7 @@ filterBtns.forEach((btn) => {
     updateList();
   });
 });
+const reqText = document.querySelector(".req");
 
 todoForm.addEventListener("submit", function (event) {
   event.preventDefault();
@@ -171,6 +174,13 @@ todoForm.addEventListener("submit", function (event) {
   const title = event.target.title.value;
   const date = event.target.date.value || null;
 
+  if (!title) {
+    reqText.hidden = false;
+    setTimeout(() => {
+      reqText.hidden = true;
+    }, 3000);
+    return;
+  }
   const todoObj = {
     id,
     title,
@@ -217,15 +227,14 @@ function updateList() {
     }
 
     if (statusFilter === "completed") {
-      completedCount
-        ? (taskCount.textContent = `${completedCount} completed`)
-        : (taskCount.textContent = "nothing completed yet");
+      taskCount.textContent = completedCount
+        ? `${completedCount} completed`
+        : "nothing completed yet";
       statusResult = task.done;
     } else if (statusFilter === "pending") {
-      pendingCount
-        ? (taskCount.textContent = `${pendingCount} pending`)
-        : (taskCount.textContent = "all caught up");
-
+      taskCount.textContent = pendingCount
+        ? `${pendingCount} pending`
+        : "all caught up";
       statusResult = !task.done;
     }
     return searchResult && statusResult;
@@ -239,5 +248,7 @@ function updateList() {
 
   showListHandler(filteredArr);
   updatedListDisplay();
+  todoForm.style.height = filteredArr.length > 1 ? "auto" : "100%";
 }
+
 updateList();
