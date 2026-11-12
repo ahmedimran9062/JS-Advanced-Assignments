@@ -64,8 +64,13 @@
             <div class="filter-sort">
               <label for="sort">SORT BY</label>
               <select onchange="updateList()" name="sort" id="sort">
-                <option value="newest">Newest added</option>
-                <option value="oldest">Oldest added</option>
+                <option value="soonest">Due date: soonest</option>
+                <option value="latest">Due date: latest</option>
+                <option value="newest">Date :Newest added</option>
+                <option value="oldest">Date: Oldest added</option>
+
+                <option value="atoz">Title: A to Z</option>
+                <option value="ztoa">Title: Z to A</option>
               </select>
             </div>
 
@@ -77,47 +82,7 @@
           </div>
           <p class="task-count"></p>
         </div>
-        <ul class="list-container">
-          <li class="task">
-            <div>
-              <input type="checkbox" />
-            </div>
-            <div class="taskInfo">
-              <p class="taskTitle">Submit CSS assignment</p>
-              <p class="taskDate">19 NOV 2026</p>
-            </div>
-            <div class="taskActions">
-              <button class="btn editBtn">Edit</button>
-              <button class="btn deleteBtn">Delete</button>
-            </div>
-          </li>
-          <li class="task done">
-            <label for="taskCheck">
-              <input type="checkbox" id="taskCheck" />
-            </label>
-            <div class="taskInfo">
-              <p class="taskTitle">Finish homework</p>
-              <time class="taskDate" datetime="2026-11-19">19 NOV 2026</time>
-            </div>
-            <div class="taskActions">
-              <button class="btn editBtn" disabled>Edit</button>
-              <button class="btn deleteBtn">Delete</button>
-            </div>
-          </li>
-          <li class="task editing">
-            <label for="taskCheck">
-              <input type="checkbox" id="taskCheck" />
-            </label>
-            <div class="taskInfo">
-              <input type="text" class="form-input" aria-label="Edit title" />
-              <input type="date" class="form-input" aria-label="Edit date" />
-            </div>
-            <div class="taskActions">
-              <button class="btn saveBtn">save</button>
-              <button class="btn cancelBtn">cancel</button>
-            </div>
-          </li>
-        </ul>
+        <ul class="list-container"></ul>
       </section>
     </main>
     <script src="script.js"></script>

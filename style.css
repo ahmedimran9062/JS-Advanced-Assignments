@@ -316,6 +316,35 @@ select:focus-visible {
   color: var(--muted);
   font-size: 0.85rem;
 }
+.taskInfo .taskDate.overduedate {
+  text-decoration: line-through;
+}
+.taskDateText {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.taskDue {
+  color: var(--danger);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 0.125rem 0.5rem;
+  border: 0.125rem solid var(--muted);
+  color: var(--muted);
+}
+.taskDue:empty {
+  display: none;
+}
+.taskDue.duesoon {
+  color: var(--danger);
+}
+.taskDue.overdue {
+  border-color: var(--danger);
+  color: var(--danger);
+}
 .taskActions {
   display: flex;
   gap: 0.75rem;
@@ -357,6 +386,9 @@ select:focus-visible {
 .task.done .taskTitle {
   text-decoration: line-through;
   color: var(--muted);
+}
+.task.done .taskDateText {
+  display: none;
 }
 .task .taskActions .btn:disabled {
   color: var(--muted);

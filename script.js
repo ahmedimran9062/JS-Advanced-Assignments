@@ -41,6 +41,18 @@ const listContainer = document.querySelector(".list-container");
 let editingId = null;
 const taskCount = document.querySelector(".task-count");
 
+function getDueDate(datestr) {
+  if (!datestr) return null;
+
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const dueDay = new Date(datestr);
+  dueDay.setHours(0, 0, 0, 0);
+
+  const daysUntilDue = Math.round((dueDay - today) / (1000 * 60 * 60 * 24));
+  return daysUntilDue;
+}
+
 function showListHandler(arr) {
   listContainer.innerHTML = "";
   arr.forEach((todoTask) => {
@@ -48,6 +60,20 @@ function showListHandler(arr) {
     task.classList.add("task");
     task.classList.toggle("done", todoTask.done);
     task.dataset.id = todoTask.id;
+    const dueDate = getDueDate(todoTask.date);
+
+    let dueStatus;
+    if (dueDate === null || todoTask.done) {
+      dueStatus = "";
+    } else if (dueDate < 0) {
+      dueStatus = "Overdue";
+    } else if (dueDate === 0) {
+      dueStatus = "Due Today";
+    } else if (dueDate === 1) {
+      dueStatus = `Due Tomorrow`;
+    } else {
+      dueStatus = `Due in ${dueDate} days`;
+    }
     if (todoTask.id === editingId) {
       task.innerHTML = `
                   <div>
@@ -76,10 +102,14 @@ function showListHandler(arr) {
       task.querySelector(".saveBtn").addEventListener("click", () => {
         setTimeout(() => {
           const updatedTitle = task.querySelector(".editTitle").value;
+          const updatedDate = task.querySelector(".editDate").value || null;
           if (!updatedTitle) return;
 
           todoTask.title = updatedTitle;
-          todoTask.date = task.querySelector(".editDate").value || null;
+          todoTask.date = updatedDate;
+          todoTask.dueTime = updatedDate
+            ? new Date(updatedDate + "T00:00:00").getTime()
+            : null;
 
           editingId = null;
           localStorage.setItem("todos", JSON.stringify(todoArr));
@@ -100,19 +130,36 @@ function showListHandler(arr) {
             </div>
             <div class="taskInfo">
               <p class="taskTitle"></p>
-              <p class="taskDate"></p>
+               <p class="taskDateText">
+                <span class="taskDate"></span>
+                <span class="taskDue"></span>
+               </p>         
             </div>
             <div class="taskActions">
               <button class="btn editBtn" ${todoTask.done ? "disabled" : ""}>Edit</button>
               <button class="btn deleteBtn">Delete</button>
             </div>`;
-
+    const taskDue = task.querySelector(".taskDue");
+    const taskDate = task.querySelector(".taskDate");
     task.querySelector(".taskTitle").textContent = todoTask.title;
     task.querySelector(".taskDate").textContent = formatDate(todoTask.date);
+    task.querySelector(".taskDue").textContent = dueStatus;
 
+    if (dueDate < 0) {
+      taskDue.classList.add("overdue");
+      taskDate.classList.add("overduedate");
+    } else if (dueDate === 0) {
+      taskDue.classList.add("duesoon");
+    } else if (dueDate === 1) {
+      taskDue.classList.add("duesoon");
+    } else {
+      dueStatus = `Due in ${dueDate} days`;
+    }
     task.querySelector(".editBtn").addEventListener("click", () => {
-      editingId = todoTask.id;
-      updateList();
+      setTimeout(() => {
+        editingId = todoTask.id;
+        updateList();
+      }, 100);
     });
 
     const deleteBtn = task.querySelector(".deleteBtn");
@@ -131,7 +178,7 @@ function showListHandler(arr) {
       setTimeout(() => {
         deleteBtn.textContent = "delete";
         deleteBtn.classList.remove("confirmBtn");
-        editBtn.style.display = "inline";
+        editBtn.style.display = "";
       }, 3000);
     });
 
@@ -173,6 +220,7 @@ todoForm.addEventListener("submit", function (event) {
   const id = Math.floor(Math.random() * 100000);
   const title = event.target.title.value;
   const date = event.target.date.value || null;
+  const dueTime = date ? new Date(date + "T00:00:00").getTime() : null;
 
   if (!title) {
     reqText.hidden = false;
@@ -187,11 +235,13 @@ todoForm.addEventListener("submit", function (event) {
     date,
     done: false,
     createdAt: Date.now(),
+    dueTime,
   };
 
   todoArr.push(todoObj);
 
   localStorage.setItem("todos", JSON.stringify(todoArr));
+  console.log(todoObj);
 
   updateList();
   event.target.reset();
@@ -244,6 +294,16 @@ function updateList() {
     filteredArr.sort((a, b) => b.createdAt - a.createdAt);
   } else if (sortByValue === "oldest") {
     filteredArr.sort((a, b) => a.createdAt - b.createdAt);
+  } else if (sortByValue === "soonest") {
+    filteredArr.sort(
+      (a, b) => (a.dueTime || 9999999999999) - (b.dueTime || 9999999999999),
+    );
+  } else if (sortByValue === "latest") {
+    filteredArr.sort((a, b) => (b.dueTime || -1) - (a.dueTime || -1));
+  } else if (sortByValue === "atoz") {
+    filteredArr.sort((a, b) => a.title.localeCompare(b.title));
+  } else if (sortByValue === "ztoa") {
+    filteredArr.sort((a, b) => b.title.localeCompare(a.title));
   }
 
   showListHandler(filteredArr);
@@ -252,3 +312,4 @@ function updateList() {
 }
 
 updateList();
+console.log(todoArr);
